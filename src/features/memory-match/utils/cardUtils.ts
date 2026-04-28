@@ -1,5 +1,6 @@
 import type { Card } from "/@/features/memory-match/types";
 import { GRID_COUNT } from "./gridUtils";
+import { shuffleArray } from "/@/utils/shuffle";
 
 const CARD_SYMBOLS = [
   "🎮",
@@ -37,15 +38,6 @@ export const getSymbols = (count: number): string[] => {
     );
   }
   return CARD_SYMBOLS.slice(0, pairsNeeded);
-};
-
-export const shuffleArray = <T>(array: T[]): T[] => {
-  const shuffled = [...array];
-  for (let i = shuffled.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-  }
-  return shuffled;
 };
 
 export const generateCards = (count: number = GRID_COUNT): Card[] => {
