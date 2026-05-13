@@ -25,6 +25,10 @@ export const GameStats: React.FC<GameStatsProps> = ({ stats, elapsedSeconds }) =
       transition={{ duration: 0.4 }}
     >
       <div className="flex flex-col items-center px-5 py-3 rounded-xl bg-white/5 border border-white/10 min-w-20">
+        <span className="text-2xl font-bold text-primary">{stats.score}</span>
+        <span className="text-xs text-text-muted uppercase tracking-wider">Score</span>
+      </div>
+      <div className="flex flex-col items-center px-5 py-3 rounded-xl bg-white/5 border border-white/10 min-w-20">
         <span className="text-2xl font-bold text-primary">{stats.moves}</span>
         <span className="text-xs text-text-muted uppercase tracking-wider">Moves</span>
       </div>

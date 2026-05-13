@@ -20,7 +20,11 @@ const initialStats: GameStats = {
   matches: 0,
   startTime: null,
   endTime: null,
+  score: 0,
 };
+
+const MATCHING_SCORE = 10;
+const MISMATCH_SCORE = -5;
 
 export const useMemoryGameStore = create<MemoryGameState>()(
   devtools(
@@ -53,6 +57,7 @@ export const useMemoryGameStore = create<MemoryGameState>()(
           const newMatches = isMatch ? stats.matches + 1 : stats.matches;
           const totalPairs = GRID_COUNT / 2;
           const isComplete = newMatches === totalPairs;
+          const score = stats.score + (isMatch ? MATCHING_SCORE : MISMATCH_SCORE);
 
           set({
             cards: updatedCards,
@@ -63,6 +68,7 @@ export const useMemoryGameStore = create<MemoryGameState>()(
               matches: newMatches,
               startTime: newStartTime,
               endTime: isComplete ? Date.now() : null,
+              score,
             },
             status: isComplete ? "complete" : "playing",
             isLocked: true,

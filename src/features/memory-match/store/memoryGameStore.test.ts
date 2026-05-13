@@ -10,7 +10,7 @@ beforeEach(() => {
       { id: 3, symbol: "🎯", pairId: 1, isFlipped: false, isMatched: false },
     ],
     flippedCardIds: [],
-    stats: { moves: 0, matches: 0, startTime: null, endTime: null },
+    stats: { moves: 0, matches: 0, startTime: null, endTime: null, score: 0 },
     status: "idle",
     isLocked: false,
   });
@@ -99,6 +99,22 @@ describe("useMemoryGameStore - flipCard", () => {
     expect(useMemoryGameStore.getState().stats.moves).toBe(1);
     vi.runAllTimers();
   });
+
+  it("should increment points by 10", () => {
+    vi.useFakeTimers();
+    useMemoryGameStore.getState().flipCard(0);
+    useMemoryGameStore.getState().flipCard(2);
+    expect(useMemoryGameStore.getState().stats.score).toBe(10);
+    vi.runAllTimers();
+  });
+
+  it("should increment points by -5", () => {
+    vi.useFakeTimers();
+    useMemoryGameStore.getState().flipCard(0);
+    useMemoryGameStore.getState().flipCard(1);
+    expect(useMemoryGameStore.getState().stats.score).toBe(-5);
+    vi.runAllTimers();
+  });
 });
 
 describe("useMemoryGameStore - resetGame", () => {
@@ -110,6 +126,7 @@ describe("useMemoryGameStore - resetGame", () => {
     useMemoryGameStore.getState().resetGame();
     const { stats, status, flippedCardIds, isLocked } = useMemoryGameStore.getState();
     expect(stats.moves).toBe(0);
+    expect(stats.score).toBe(0);
     expect(stats.matches).toBe(0);
     expect(status).toBe("idle");
     expect(flippedCardIds).toHaveLength(0);

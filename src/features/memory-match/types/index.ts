@@ -16,6 +16,7 @@ export interface GameStats {
   matches: number;
   startTime: number | null;
   endTime: number | null;
+  score: number;
 }
 
 export type GameStatus = "idle" | "playing" | "complete";

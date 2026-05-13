@@ -1,5 +1,6 @@
 import { describe, it, expect, vi } from "vitest";
-import { generateCards, shuffleArray, checkMatch, getSymbols } from "./cardUtils";
+import { generateCards, checkMatch, getSymbols } from "./cardUtils";
+import { shuffleArray } from "/@/utils/shuffle";
 
 describe("getSymbols", () => {
   it("should return half the count as symbols", () => {
